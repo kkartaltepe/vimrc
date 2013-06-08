@@ -71,7 +71,6 @@ set incsearch
 " script, <http://www.vim.org/scripts/script.php?script_id=1876>.
 " set nomodeline
 
-
 "------------------------------------------------------------
 " Usability options {{{1
 "
@@ -142,10 +141,9 @@ set pastetoggle=<F11>
 
 " Indentation settings for using 2 spaces instead of tabs.
 " Do not change 'tabstop' from its default value of 8 with this setup.
-set tabstop=2
-set shiftwidth=2
-set softtabstop=2
-set expandtab
+set tabstop=4
+set shiftwidth=4
+set softtabstop=4
 
 " Indentation settings for using hard tabs for indent. Display tabs as
 " two characters wide.
@@ -177,7 +175,8 @@ nnoremap <C-L> :nohl<CR><C-L>
 set list
 
 " Display trailing whitespace as "~"
-set listchars=trail:~
+" But keep tabs as tabs.
+set listchars=tab:\ \ ,trail:~
 
 "------------------------------------------------------------
 " Movement options {{{1
@@ -192,5 +191,42 @@ map <C-j> <C-w>j
 map <C-k> <C-w>k
 map <C-l> <C-w>l
 
+"------------------------------------------------------------
+" Plugin/Vundle options {{{1
+
+set rtp+=~/.vim/bundle/vundle
+call vundle#rc()
+
+" Vundle Bundles
+Bundle 'gmarik/vundle'
+Bundle 'tpope/vim-fugitive'
+Bundle 'Shougo/neocomplcache.vim'
+Bundle 'scrooloose/nerdcommenter'
+Bundle 'scrooloose/nerdtree'
+Bundle 'tpope/vim-surround'
 
 
+" neocomplcache settings
+let g:neocomplcache_enable_at_startup = 1
+inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
+function! s:my_cr_function()
+	return neocomplcache#smart_close_popup() . "\<CR>"
+endfunction
+" <TAB>: completion
+inoremap <expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
+" <BS>: close popup and delete backword char.
+inoremap <expr><BS> neocomplcache#smart_close_popup()."\<C-h>"
+" Enable omni completion.
+autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
+autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
+autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
+autocmd FileType ruby,eruby setlocal omnifunc=rubycomplete#Complete
+autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+
+" Enable heavy omni completion.
+if !exists('g:neocomplcache_omni_patterns')
+  let g:neocomplcache_omni_patterns = {}
+endif
+let g:neocomplcache_omni_patterns.c = '[^.[:digit:] *\t]\%(\.\|->\)'
+let g:neocomplcache_omni_patterns.cpp = '[^.[:digit:] *\t]\%(\.\|->\)\|\h\w*::'
