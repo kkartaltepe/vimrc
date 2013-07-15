@@ -213,7 +213,8 @@ map <C-l> <C-w>l
 	Bundle 'scrooloose/nerdcommenter'
 	Bundle 'scrooloose/nerdtree'
 	Bundle 'tpope/vim-surround'
-    Bundle 'Syntastic' "uber awesome syntax and errors highlighter
+	"uber awesome syntax and errors highlighter
+    Bundle 'scrooloose/syntastic'
     "...All your other bundles...
     if iCanHazVundle == 0
         echo "Installing Bundles, please ignore key map error messages"
