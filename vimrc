@@ -204,24 +204,24 @@ map <C-l> <C-w>l
         let iCanHazVundle=0
     endif
     set rtp+=~/.vim/bundle/vundle/
-    call vundle#rc()
-    Bundle 'gmarik/vundle'
+    call vundle#begin()
+    Plugin 'gmarik/vundle'
 	" Vundle Bundles
-	Bundle 'gmarik/vundle'
-	Bundle 'tpope/vim-fugitive'
-	Bundle 'Shougo/neocomplcache.vim'
-	Bundle 'scrooloose/nerdcommenter'
-	Bundle 'scrooloose/nerdtree'
-	Bundle 'tpope/vim-surround'
+	Plugin 'tpope/vim-fugitive'
+	Plugin 'Shougo/neocomplcache.vim'
+	Plugin 'scrooloose/nerdcommenter'
+	Plugin 'scrooloose/nerdtree'
+	Plugin 'tpope/vim-surround'
 	"uber awesome syntax and errors highlighter
-    Bundle 'scrooloose/syntastic'
+    Plugin 'scrooloose/syntastic'
     "...All your other bundles...
     if iCanHazVundle == 0
         echo "Installing Bundles, please ignore key map error messages"
         echo ""
-        :BundleInstall
+        :PluginInstall
     endif
 " Setting up Vundle - the vim plugin bundler end
+    call vundle#end()
 
 
 " neocomplcache settings
